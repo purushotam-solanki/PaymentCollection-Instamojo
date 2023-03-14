@@ -35,7 +35,7 @@ router.post('/pay', async (req, res) => {
         data.purpose = invoice.purpose;            // REQUIRED
         data.amount = invoice.amount;                  // REQUIRED
         data.setRedirectUrl(`https://instamojopayments.onrender.com/success`);
-        // data.webhook = "http://localhost:5000/webhook"
+        data.webhook = "https://instamojopayments.onrender.com/webhook/instamojo"
         const response = Insta.createPayment(data, function (error, response) {
             if (error) {
                 // some error
