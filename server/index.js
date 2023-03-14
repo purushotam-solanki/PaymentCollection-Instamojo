@@ -14,6 +14,7 @@ const PORT = process.env.PORT
 //Connecting to db as soon as Server is started
 require("./database/index")
 
+//setting express app
 const app = express();
 
 //Enabling CORS 
@@ -39,7 +40,6 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'))
     })
 }
-
 
 app.listen(PORT, () => {
     console.log(`server is listening on PORT ${PORT}`)

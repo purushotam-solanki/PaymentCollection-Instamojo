@@ -10,9 +10,9 @@ router.post("/instamojo", async (req, res) => {
         // let status = VALID_STATUS.includes(data.status.toLowerCase()) ? "success" : data.status.toLowerCase();
         // await Payments.findOneAndUpdate({ providerId: data.payment_request_id }, { $set: { status: status } })
         // console.log("webhook end point hit")
-        res.status(200).json({ status: true, message: "webhook processed" })
+        res.status(200).end()
     } catch (err) {
-        res.status(500).json({ status: false, message: err.message })
+        res.status(500).end()
     }
 })
 
