@@ -11,7 +11,7 @@ router.post("/instamojo", async (req, res) => {
         console.log("webhook end point hit")
         res.status(200).end()
     } catch (err) {
-        res.status(50).end()
+        res.status(500).end()
     }
 })
 
