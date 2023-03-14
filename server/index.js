@@ -1,5 +1,4 @@
 require('dotenv').config()
-// bkFusJScoIDphHmv
 const express = require("express")
 const cors = require("cors")
 const bodyParser = require('body-parser')
@@ -7,6 +6,7 @@ const Insta = require("instamojo-nodejs")
 
 //Seprating internal imports from external imports
 const paymentsController = require("./controller/paymentsController")
+const { Payments } = require("./database/schema/Payment")
 
 const PORT = process.env.PORT || 5000
 
@@ -16,7 +16,7 @@ require("./database/index")
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:3000']
+    origin: ['http://localhost:3000', "https://paymentcollection-instamojoclient.onrender.com"]
 }))
 
 app.use(bodyParser.json())
@@ -24,10 +24,19 @@ app.use(bodyParser.json())
 Insta.setKeys(process.env.INSTAMOJO_API_KEY, process.env.INSTAMOJO_AUTH_KEY);
 Insta.isSandboxMode(true);
 
+app.get("/", (req, res) => {
+    res.send("Server is Running!!!")
+})
+
 app.use("/payment", paymentsController)
-app.post("/webhook", (req, res) => {
+app.post("/webhook", async (req, res) => {
+    console.log("webhook request: " + req)
+    const { data } = req.body;
+    await Payments.findOneAndUpdate({ providerId: data.id }, { $set: { status: data.status } })
     console.log("webhook end point hit")
 })
+
+
 app.listen(PORT, () => {
     console.log(`server is listening on PORT ${PORT}`)
 })
