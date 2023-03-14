@@ -5,13 +5,13 @@ const Payments = () => {
     const [list, setList] = useState([]);
     const fetchPayments = async () => {
         console.log("fetchPayments called")
-        let res = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/payment/list`);
+        let res = await fetch(`/payment/list`);
         res = await res.json();
         setList(res)
     }
     const onClickPayNowHandler = async (payment) => {
         console.log("Pay now clicked", payment)
-        let res = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/payment/pay`, { payment })
+        let res = await axios.post(`/payment/pay`, { payment })
         if (res.status) {
             window.location.href = res.data.message
         }

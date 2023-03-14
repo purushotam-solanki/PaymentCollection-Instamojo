@@ -32,6 +32,8 @@ app.post("/webhook", async (req, res) => {
     await Payments.findOneAndUpdate({ providerId: data.id }, { $set: { status: data.status } })
     console.log("webhook end point hit")
 })
+
+//serving react app
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, '../client', 'build')))
     
