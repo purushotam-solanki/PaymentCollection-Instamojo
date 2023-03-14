@@ -5,7 +5,7 @@ const { Invoices } = require("../database/schema/Invoice")
 
 router.post("/instamojo", async (req, res) => {
     try {
-        console.log("webhook request: " + JSON.stringify(req))
+        console.log("webhook request: " + req)
         // const { data } = req.body;
         // let status = VALID_STATUS.includes(data.status.toLowerCase()) ? "success" : data.status.toLowerCase();
         // await Payments.findOneAndUpdate({ providerId: data.payment_request_id }, { $set: { status: status } })
