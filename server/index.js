@@ -28,8 +28,8 @@ Insta.setKeys(process.env.INSTAMOJO_API_KEY, process.env.INSTAMOJO_AUTH_KEY);
 Insta.isSandboxMode(true);
 
 //All router handlers
-app.use("/payment", paymentsController)
-app.post("/webhook", webhookController)
+app.use("/payment", () => paymentsController)
+app.post("/webhook", () => webhookController)
 
 //serving react app on production
 if (process.env.NODE_ENV === "production") {
