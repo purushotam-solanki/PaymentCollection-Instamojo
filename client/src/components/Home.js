@@ -10,7 +10,7 @@ const Home = () => {
     const onSubmitFormHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/payment/create", {
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_BASE_URL}/payment/create`, {
                 payment: {
                     email: formValues.email,
                     amount: formValues.amount,

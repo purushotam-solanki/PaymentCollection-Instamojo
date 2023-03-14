@@ -34,8 +34,8 @@ router.post('/pay', async (req, res) => {
 
         data.purpose = payment.purpose;            // REQUIRED
         data.amount = payment.amount;                  // REQUIRED
-        data.setRedirectUrl("http://localhost:3000/success");
-        data.webhook = "http://localhost:5000/webhook"
+        data.setRedirectUrl(`${process.env.CLIENT_BASE_URL}/success`);
+        // data.webhook = "http://localhost:5000/webhook"
         const response = Insta.createPayment(data, function (error, response) {
             if (error) {
                 // some error

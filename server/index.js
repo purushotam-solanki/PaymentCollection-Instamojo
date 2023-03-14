@@ -8,7 +8,7 @@ const Insta = require("instamojo-nodejs")
 const paymentsController = require("./controller/paymentsController")
 const { Payments } = require("./database/schema/Payment")
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT
 
 //Connecting to db as soon as Server is started
 require("./database/index")
@@ -16,7 +16,7 @@ require("./database/index")
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:3000', "https://paymentcollection-instamojoclient.onrender.com"]
+    origin: [`${process.env.CLIENT_BASE_URL}`]
 }))
 
 app.use(bodyParser.json())
