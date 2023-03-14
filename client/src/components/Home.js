@@ -11,8 +11,8 @@ const Home = () => {
     const onSubmitFormHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`/payment/create`, {
-                payment: {
+            const res = await axios.post(`/invoice/create`, {
+                invoice: {
                     email: formValues.email,
                     amount: formValues.amount,
                     purpose: formValues.purpose
@@ -41,7 +41,7 @@ const Home = () => {
 
     return (
         <div className="container" style={{ borderRadius: "10px", marginTop: "50px" }}>
-            <h2 className="text-center">Create Payment Link</h2>
+            <h2 className="text-center">Create an Invoice</h2>
             <form onSubmit={onSubmitFormHandler}>
                 <div className="form-group">
                     <lable htmlFor="email">Email</lable>

@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
-import Payment from "./Payment";
+import Invoice from "./Invoice";
 
-const Payments = () => {
+const Invoices = () => {
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false)
-    const fetchPayments = async () => {
-        console.log("fetchPayments called")
+    const fetchInvoices = async () => {
+        console.log("fetchInvoices called")
         setLoading(true)
-        let res = await fetch(`/payment/list`);
+        let res = await fetch(`http://localhost:5000/invoice/list`);
         res = await res.json();
         setList(res)
         setLoading(false)
     }
 
     useEffect(() => {
-        fetchPayments()
+        fetchInvoices()
     }, [])
 
     return (
         <div className="container-fluid">
-            <h2 className="text-center">Payments</h2>
+            <h2 className="text-center">Invoices</h2>
             {loading && <h6 className="text-center">Loading...</h6>}
-            {!loading && list.length === 0 && <h6 className="text-center">No Payments found!!</h6>}
+            {!loading && list.length === 0 && <h6 className="text-center">No Invoice found!!</h6>}
             {list.length > 0 &&
                 <table className="table">
                     <thead>
@@ -35,7 +35,7 @@ const Payments = () => {
                     <tbody>
                         {list.map((item, index) => {
                             return (
-                                <Payment payment={item} />
+                                <Invoice invoice={item} />
                             )
                         })}
 
@@ -46,4 +46,4 @@ const Payments = () => {
     )
 }
 
-export default Payments
+export default Invoices

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom"
 
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Payments from "./components/Payments";
+import Invoices from "./components/Invoices";
 import Success from "./components/Success";
 
 const App = () => {
@@ -11,8 +11,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="/payments" element={<Payments />}></Route>
-        <Route exact path="/success" element={<Success/>}></Route>
+        <Route exact path="/invoices" element={<Invoices />}></Route>
+        <Route exact path="/success" element={<Success />}></Route>
       </Routes>
     </>
   );

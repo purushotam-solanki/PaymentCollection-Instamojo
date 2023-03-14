@@ -6,7 +6,7 @@ const Insta = require("instamojo-nodejs")
 const path = require("path")
 
 //Seprating internal imports from external imports
-const paymentsController = require("./controller/paymentsController")
+const invoiceController = require("./controller/invoiceController")
 const webhookController = require("./controller/webhookController")
 
 const PORT = process.env.PORT
@@ -28,7 +28,7 @@ Insta.setKeys(process.env.INSTAMOJO_API_KEY, process.env.INSTAMOJO_AUTH_KEY);
 Insta.isSandboxMode(true);
 
 //All router handlers
-app.use("/payment", paymentsController)
+app.use("/invoice", invoiceController)
 app.use("/webhook", webhookController)
 
 //serving react app on production

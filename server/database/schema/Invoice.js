@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const PaymentSchema = new mongoose.Schema({
+const InvoiceSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
@@ -17,14 +17,14 @@ const PaymentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    paymentId: {
+    invoiceId: {
         type: String,
         required: true
     },
-    providerId: String
+    paymentId: String
 }, {
     timestamps: true
 })
 
-const Payments = mongoose.model("payments", PaymentSchema)
-module.exports = { Payments }
+const Invoices = mongoose.model("invoices", InvoiceSchema)
+module.exports = { Invoices }
