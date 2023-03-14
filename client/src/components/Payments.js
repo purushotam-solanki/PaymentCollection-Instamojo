@@ -3,11 +3,14 @@ import axios from "axios";
 
 const Payments = () => {
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false)
     const fetchPayments = async () => {
         console.log("fetchPayments called")
+        setLoading(true)
         let res = await fetch(`/payment/list`);
         res = await res.json();
         setList(res)
+        setLoading(false)
     }
     const onClickPayNowHandler = async (payment) => {
         console.log("Pay now clicked", payment)
@@ -24,7 +27,8 @@ const Payments = () => {
     return (
         <div className="container-fluid">
             <h2 className="text-center">Payments</h2>
-            {list.length === 0 && <h6 className="text-center">No Payments found!!</h6>}
+            {loading && <h6 className="text-center">Loading...</h6>}
+            {!loading && list.length === 0 && <h6 className="text-center">No Payments found!!</h6>}
             {list.length > 0 &&
                 <table className="table">
                     <thead>
