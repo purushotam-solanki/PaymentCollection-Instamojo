@@ -17,7 +17,7 @@ const Invoice = (props) => {
                 <td>{invoice.email}</td>
                 <td>{invoice.purpose}</td>
                 <td>{invoice.amount}</td>
-                <td>{invoice.status.toLowerCase() !== "paid" ?
+                <td>{invoice.status.toLowerCase() !== "success" ?
                     <button className="btn btn-info" onClick={() => { onClickPayNowHandler(invoice) }}>Pay Now</button> :
                     invoice.status.toUpperCase()}
                 </td>
