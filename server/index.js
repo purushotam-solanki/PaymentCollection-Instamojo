@@ -7,7 +7,7 @@ const path = require("path")
 
 //Seprating internal imports from external imports
 const paymentsController = require("./controller/paymentsController")
-const { Payments } = require("./database/schema/Payment")
+const webhookController = require("./controller/webhookController")
 
 const PORT = process.env.PORT
 
@@ -16,27 +16,25 @@ require("./database/index")
 
 const app = express();
 
+//Enabling CORS 
 app.use(cors({
     origin: [`${process.env.CLIENT_BASE_URL}`]
 }))
-console.log(path.join(__dirname, '../client', 'build'))
+
 app.use(bodyParser.json())
+
 //Setting keys for InstaMojo
 Insta.setKeys(process.env.INSTAMOJO_API_KEY, process.env.INSTAMOJO_AUTH_KEY);
 Insta.isSandboxMode(true);
 
+//All router handlers
 app.use("/payment", paymentsController)
-app.post("/webhook", async (req, res) => {
-    console.log("webhook request: " + req)
-    const { data } = req.body;
-    await Payments.findOneAndUpdate({ providerId: data.id }, { $set: { status: data.status } })
-    console.log("webhook end point hit")
-})
+app.post("/webhook", webhookController)
 
-//serving react app
+//serving react app on production
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, '../client', 'build')))
-    
+
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'))
     })

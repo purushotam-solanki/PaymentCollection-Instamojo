@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import Payment from "./Payment";
 
 const Payments = () => {
     const [list, setList] = useState([]);
@@ -12,14 +12,7 @@ const Payments = () => {
         setList(res)
         setLoading(false)
     }
-    const onClickPayNowHandler = async (payment) => {
-        console.log("Pay now clicked", payment)
-        let res = await axios.post(`/payment/pay`, { payment })
-        if (res.status) {
-            window.location.href = res.data.message
-        }
-        console.log(res)
-    }
+
     useEffect(() => {
         fetchPayments()
     }, [])
@@ -41,16 +34,8 @@ const Payments = () => {
                     </thead>
                     <tbody>
                         {list.map((item, index) => {
-                            return (<tr>
-                                {/* <th scope="row">{index}</th> */}
-                                <td>{item.email}</td>
-                                <td>{item.purpose}</td>
-                                <td>{item.amount}</td>
-                                <td>{item.status.toLowerCase() !== "paid" ?
-                                    <button className="btn btn-info" onClick={() => { onClickPayNowHandler(item) }}>Pay Now</button> :
-                                    item.status.toUpperCase()}
-                                </td>
-                            </tr>
+                            return (
+                                <Payment payment={item} />
                             )
                         })}
 
