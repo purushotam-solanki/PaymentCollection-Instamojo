@@ -41,7 +41,7 @@ const Home = () => {
 
     return (
         <div className="container" style={{ borderRadius: "10px", marginTop: "50px" }}>
-            <h2 className="text-center">Create an Invoice</h2>
+            <h2 className="text-center">Generate an Invoice</h2>
             <form onSubmit={onSubmitFormHandler}>
                 <div className="form-group">
                     <lable htmlFor="email">Email</lable>
