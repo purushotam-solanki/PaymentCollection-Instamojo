@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const VALID_STATUS = require("../utils/constant")
+const { VALID_STATUS } = require("../utils/constant")
 const { Invoices } = require("../database/schema/Invoice")
 
 router.post("/instamojo", async (req, res) => {
