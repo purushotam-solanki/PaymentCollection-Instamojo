@@ -15,8 +15,7 @@ const PORT = process.env.PORT
 require("./database/index")
 
 const app = express();
-// console.log(paymentsController)
-// console.log(webhookController)
+
 //Enabling CORS 
 app.use(cors({
     origin: [`${process.env.CLIENT_BASE_URL}`]
