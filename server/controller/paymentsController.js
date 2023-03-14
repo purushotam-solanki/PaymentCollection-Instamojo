@@ -44,10 +44,13 @@ router.post('/pay', async (req, res) => {
                 // Payment redirection link at response.payment_request.longurl
                 const responseData = JSON.parse(response)
                 //updating the status and providerId of payment
-                Payments.findOneAndUpdate(
-                    { paymentId: payment.paymentId },
-                    { $set: { status: "pending", providerId: responseData.payment_request.id } }
-                ).then(result => console.log(result))
+                if (responseData.success) {
+                    Payments.findOneAndUpdate(
+                        { paymentId: payment.paymentId },
+                        { $set: { status: "pending", providerId: responseData.payment_request.id } }
+                    ).then(result => console.log(result)).
+                        catch(err => console.log(err))
+                }
                 res.json({ status: true, message: responseData.payment_request.longurl })
             }
         });
