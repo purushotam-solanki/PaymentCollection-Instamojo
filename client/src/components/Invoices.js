@@ -7,7 +7,7 @@ const Invoices = () => {
     const fetchInvoices = async () => {
         console.log("fetchInvoices called")
         setLoading(true)
-        let res = await fetch(`http://localhost:5000/invoice/list`);
+        let res = await fetch(`/invoice/list`);
         res = await res.json();
         setList(res)
         setLoading(false)
