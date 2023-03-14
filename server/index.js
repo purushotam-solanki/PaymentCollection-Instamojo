@@ -19,7 +19,7 @@ const app = express();
 app.use(cors({
     origin: [`${process.env.CLIENT_BASE_URL}`]
 }))
-
+console.log(path.join(__dirname, './client', 'build'))
 app.use(bodyParser.json())
 //Setting keys for InstaMojo
 Insta.setKeys(process.env.INSTAMOJO_API_KEY, process.env.INSTAMOJO_AUTH_KEY);
@@ -33,9 +33,10 @@ app.post("/webhook", async (req, res) => {
     console.log("webhook end point hit")
 })
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, 'client', 'build')))
+    app.use(express.static(path.join(__dirname, './client', 'build')))
+    
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'))
     })
 }
 
