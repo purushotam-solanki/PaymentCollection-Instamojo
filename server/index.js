@@ -24,9 +24,6 @@ app.use(bodyParser.json())
 //Setting keys for InstaMojo
 Insta.setKeys(process.env.INSTAMOJO_API_KEY, process.env.INSTAMOJO_AUTH_KEY);
 Insta.isSandboxMode(true);
-app.get("/", (req, res) => {
-    res.send("Server is Running!!!")
-})
 
 app.use("/payment", paymentsController)
 app.post("/webhook", async (req, res) => {
