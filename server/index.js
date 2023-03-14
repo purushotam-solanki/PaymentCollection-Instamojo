@@ -15,7 +15,8 @@ const PORT = process.env.PORT
 require("./database/index")
 
 const app = express();
-
+// console.log(paymentsController)
+// console.log(webhookController)
 //Enabling CORS 
 app.use(cors({
     origin: [`${process.env.CLIENT_BASE_URL}`]
@@ -29,7 +30,7 @@ Insta.isSandboxMode(true);
 
 //All router handlers
 app.use("/payment", paymentsController)
-app.post("/webhook", webhookController)
+app.use("/webhook", webhookController)
 
 //serving react app on production
 if (process.env.NODE_ENV === "production") {
