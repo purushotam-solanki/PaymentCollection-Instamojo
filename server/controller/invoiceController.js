@@ -6,7 +6,7 @@ const { Invoices } = require("../database/schema/Invoice")
 
 router.get('/list', async (req, res) => {
     try {
-        const result = await Invoices.find({});
+        const result = await Invoices.find({}).sort({ createdAt: -1 });
         res.status(200).json(result)
     } catch (err) {
         console.log(err)
